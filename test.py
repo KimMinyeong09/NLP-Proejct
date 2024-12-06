@@ -7,8 +7,8 @@ from dataset import preprocess_function, EmotionDataset
 from datasets import load_dataset
 
 
-DNAME = 'daily' ## daily or emo
-NUM_CLASSES = 7 ## daily
+DNAME = 'Daily' ## Daily or EMO
+NUM_CLASSES = 7 
 LABELS_DAILY = {
     0: 'no emotion',
     1: 'anger',
@@ -20,7 +20,13 @@ LABELS_DAILY = {
 }
 
 LABELS_EMO = {
-    ## TODO 
+    0: 'neutral',
+    1: 'fearful',
+    2: 'dissatisfied',
+    3: 'apologetic',
+    4: 'abusive', 
+    5: 'excited',
+    6: 'satisfied', 
 }
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -82,9 +88,9 @@ metrics = {
 
 
 # metrics for label
-if DNAME == 'daily':
+if DNAME == 'Daily':
     LABELS_DIC = LABELS_DAILY
-elif DNAME == 'emo':
+elif DNAME == 'EMO':
     LABELS_DIC = LABELS_EMO
 
 for i, label in LABELS_DIC.items():
