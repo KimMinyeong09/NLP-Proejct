@@ -9,16 +9,15 @@ from torch.nn import functional as F
 from dataset import preprocess_function, EmotionDataset
 from eval import evaluate_model
 
-train_dataset = load_dataset("csv", data_files="parsed_data/train.csv")['train']
-valid_dataset = load_dataset("csv", data_files="parsed_data/validation.csv")['train']
-test_dataset = load_dataset("csv", data_files="parsed_data/test.csv")['train']
+DNAME = 'Daily'
+
+train_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/train.csv")['train']
+valid_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/validation.csv")['train']
 
 train_dataset = train_dataset.remove_columns('Unnamed: 0')
 valid_dataset = valid_dataset.remove_columns('Unnamed: 0')
-test_dataset = test_dataset.remove_columns('Unnamed: 0')
 
 print(train_dataset)
-print(test_dataset)
 print(valid_dataset)
 
 # 로버타 토크나이저 불러오기
@@ -32,12 +31,6 @@ train_dataset = train_dataset.map(
         "tokenizer": tokenizer  # 미리 정의된 tokenizer 전달
     })
 valid_dataset = valid_dataset.map(    
-    preprocess_function, 
-    batched=True, 
-    fn_kwargs={
-        "tokenizer": tokenizer  # 미리 정의된 tokenizer 전달
-    })
-test_dataset = test_dataset.map(
     preprocess_function, 
     batched=True, 
     fn_kwargs={
