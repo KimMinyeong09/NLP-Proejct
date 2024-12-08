@@ -9,7 +9,7 @@ from torch.nn import functional as F
 from dataset import preprocess_function, EmotionDataset
 from eval import evaluate_model
 
-DNAME = 'Daily'
+DNAME = 'Daily' ## Daily or Emo
 
 train_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/train.csv")['train']
 valid_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/validation.csv")['train']
@@ -42,8 +42,8 @@ train_dataset = EmotionDataset(train_dataset)
 valid_dataset = EmotionDataset(valid_dataset)
 
 ## parameter 
-BATCH_SIZE = 32 
-EPOCHS = 5
+BATCH_SIZE = 4
+EPOCHS = 50
 LR = 5e-5
 NUM_CLASSES = 7 # 감정 레이블 개수 
 ema_decay = 0.99 
@@ -120,4 +120,4 @@ for epoch in range(EPOCHS):
     print(f"Train Loss : {avg_train_loss:.4f}")
     print(f"Validation Loss: {val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}")
     
-    student_model.save_pretrained(f"model_{epoch+1}_epoch")
+    student_model.save_pretrained(f"{DNAME}_model_{epoch+1}_epoch")
