@@ -11,8 +11,8 @@ from eval import evaluate_model
 
 DNAME = 'Daily' ## Daily or Emo
 
-train_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/train.csv")['train']
-valid_dataset = load_dataset("csv", data_files=f"parsed_data/{DNAME}/validation.csv")['train']
+train_dataset = load_dataset("csv", data_files=f"dataset/parsed_data/{DNAME}/train.csv")['train']
+valid_dataset = load_dataset("csv", data_files=f"dataset/parsed_data/{DNAME}/validation.csv")['train']
 
 train_dataset = train_dataset.remove_columns('Unnamed: 0')
 valid_dataset = valid_dataset.remove_columns('Unnamed: 0')
