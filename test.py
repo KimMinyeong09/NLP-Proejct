@@ -49,7 +49,7 @@ test_dataset = test_dataset.map(
     fn_kwargs={
         "tokenizer": tokenizer  # 미리 정의된 tokenizer 전달
     })
-test_dataset = EmotionDataset(test_dataset)
+test_dataset = EmotionDataset(test_dataset, flag_test= True)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=True)
 
 
@@ -57,9 +57,6 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=True)
 outputs = [] 
 
 for batch in test_loader:
-    global_input_ids = batch["global_input_ids"].to(device)
-    global_attention_mask = batch["global_attention_mask"].to(device)
-    global_emo = batch["global_emo"].to(device)
 
     local_input_ids = batch["local_input_ids"].to(device)
     local_attention_mask = batch["local_attention_mask"].to(device)
