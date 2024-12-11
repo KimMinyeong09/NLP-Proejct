@@ -53,10 +53,6 @@ def parse_data(in_dir, out_dir):
             print("Different turns btw dialogue & emotion & action! ", line_count+1, seq_len, emo_len, act_len)
             sys.exit()
 
-        if seq_len < 6: 
-            continue
-
-
         # Get rid of the blanks at the start & end of each turns
         seqs = [s.strip() for s in seqs]
         seqs = [s.replace(' .', '.') for s in seqs]
@@ -64,7 +60,6 @@ def parse_data(in_dir, out_dir):
         seqs = [s.replace(' !', '!') for s in seqs]
         seqs = [s.replace(' ,', ',') for s in seqs]
         seqs = [s.replace(" ’", "’") for s in seqs]
-
 
         for index in range(seq_len): 
             # local
