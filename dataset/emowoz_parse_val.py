@@ -35,8 +35,6 @@ for key, value in loaded_data.items():
         seq_len = len(seqs)
         emo_len = len(emos)
 
-        if seq_len < 6: 
-            continue
 
         # Get rid of the blanks at the start & end of each turns
         seqs = [s.strip() for s in seqs]
