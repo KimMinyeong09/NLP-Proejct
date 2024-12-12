@@ -62,10 +62,15 @@ def parse_data(in_dir, out_dir):
         if seq_len < 3: continue # 길이가 3이상인 발화에 대하여
 
         for index in range(1, seq_len - 1): # index seq 
-            global_index_seq = "".join(seqs[index -1 : index + 2]) # 세 개의 발화에 대하여   <sep> token          
+            
+            # global_seq에 스페셜 토큰 추가 
+            seqs_three = [seqs[i].strip() for i in range(index - 1, index + 2)]
+            global_index_seq = "<s> " + " </s> ".join(seqs_three) + " </s>"
             global_index_emo = emos[index]
 
-            for index_ in [index - 1, index + 1]: # pre (index - 1) post (index + 1)
+            for index_ in [index - 1, index + 1]: # pre: (index - 1) post: (index + 1)
+
+                seqs[index_] = seqs[index_].strip()
                 local_index_seq = seqs[index_]
                 local_index_emo = emos[index_]
 

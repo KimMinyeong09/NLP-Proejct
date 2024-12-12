@@ -6,14 +6,16 @@ def preprocess_function(examples, tokenizer = None):
         examples['global_seq'],
         truncation=True,
         padding='max_length',
-        max_length=128
+        max_length=512,
+        add_special_tokens=False # 데이터셋에 special token 있음. 
     )
     # 로컬 입력 시퀀스 처리
     local_encodings = tokenizer(
         examples['local_seq'],
         truncation=True,
         padding='max_length',
-        max_length=128
+        max_length=512,
+        add_special_tokens=True # 데이터셋에 special token 없음. 자동으로 토큰 추가 
     )
 
     return {
